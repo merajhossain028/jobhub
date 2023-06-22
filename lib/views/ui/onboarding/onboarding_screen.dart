@@ -3,7 +3,6 @@ import 'package:jobhub/views/ui/onboarding/widgets/page_one.dart';
 import 'package:jobhub/views/ui/onboarding/widgets/page_three.dart';
 import 'package:jobhub/views/ui/onboarding/widgets/page_two.dart';
 
-
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
@@ -13,7 +12,7 @@ class OnBoardingScreen extends StatelessWidget {
       body: Stack(
         children: [
           PageView(
-            children: [
+            children: const [
               PageOne(),
               PageTwo(),
               PageThree(),
