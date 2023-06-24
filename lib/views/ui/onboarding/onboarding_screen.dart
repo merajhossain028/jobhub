@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/controllers/onboarding_provider.dart';
 import 'package:jobhub/views/ui/onboarding/widgets/page_one.dart';
 import 'package:jobhub/views/ui/onboarding/widgets/page_three.dart';
 import 'package:jobhub/views/ui/onboarding/widgets/page_two.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -40,6 +42,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   PageTwo(),
                   PageThree(),
                 ],
+              ),
+              Positioned(
+                bottom: height * 0.12,
+                left: 0,
+                right: 0,
+                child: onBoardNotifier.isLastPage
+                    ? const SizedBox.shrink()
+                    : Center(
+                        child: SmoothPageIndicator(
+                          controller: pageController,
+                          count: 3,
+                          effect: WormEffect(
+                            dotColor: Color(kDarkGrey.value).withOpacity(0.5),
+                            activeDotColor: Color(kLight.value),
+                            dotHeight: 12,
+                            dotWidth: 12,
+                            spacing: 10,
+                          ),
+                        ),
+                      ),
               ),
             ],
           );
