@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:jobhub/constants/app_constants.dart';
+import 'package:jobhub/controllers/zoom_provider.dart';
+import 'package:jobhub/views/common/drawer/drawer_screen.dart';
+import 'package:jobhub/views/ui/homepage.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -8,10 +14,30 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  
-  
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ZoomDrawer(
+      menuScreen: const DrawerScreen(),
+      mainScreen: currentScreen(),
+      borderRadius: 30.0,
+      showShadow: true,
+      angle: 0.0,
+      slideWidth: 250,
+      menuBackgroundColor: Color(kLightBlue.value),
+    );
+  }
+
+  Widget currentScreen() {
+    var zoomNotifier = Provider.of<ZoomNotifier>(context);
+    switch (zoomNotifier.currentIndex) {
+      case 0:
+        return const HomePage();
+      case 1:
+        return const HomePage();
+      case 2:
+        return const HomePage();
+      default:
+        return const HomePage();
+    }
   }
 }
