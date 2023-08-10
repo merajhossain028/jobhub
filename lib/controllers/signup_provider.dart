@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 
 class SignUpNotifier extends ChangeNotifier {
+  
 // trigger to hide and unhide the password
   bool _isObsecure = true;
 
