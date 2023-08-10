@@ -30,91 +30,94 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginNotifier>(
-      builder: (context, loginNotifier, child) {
-        return Scaffold(
-          appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: CustomAppBar(
-              text: 'Login',
-              child: BackButton(),
-            ),
+    return Consumer<LoginNotifier>(builder: (context, loginNotifier, child) {
+      return Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: CustomAppBar(
+            text: 'Login',
+            child: BackButton(),
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                const HeightSpacer(size: 50),
-                ReusableText(
-                  text: 'Welcome Back!',
-                  style: appstyle(
-                    30,
-                    Color(kDarkBlue.value),
-                    FontWeight.w600,
-                  ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const HeightSpacer(size: 50),
+              ReusableText(
+                text: 'Welcome Back!',
+                style: appstyle(
+                  30,
+                  Color(kDarkBlue.value),
+                  FontWeight.w600,
                 ),
-                ReusableText(
-                  text: 'Fill the details to login to your account',
-                  style: appstyle(
-                    16,
-                    Color(kDarkGrey.value),
-                    FontWeight.w600,
-                  ),
+              ),
+              ReusableText(
+                text: 'Fill the details to login to your account',
+                style: appstyle(
+                  16,
+                  Color(kDarkGrey.value),
+                  FontWeight.w600,
                 ),
-                const HeightSpacer(size: 50),
-                CustomTextField(
-                  controller: email,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: 'Email',
-                  validator: (email) {
-                    if (email!.isEmpty || !email.contains('@')) {
-                      return 'Please enter a valid email';
-                    }
+              ),
+              const HeightSpacer(size: 50),
+              CustomTextField(
+                controller: email,
+                keyboardType: TextInputType.emailAddress,
+                hintText: 'Email',
+                validator: (email) {
+                  if (email!.isEmpty || !email.contains('@')) {
+                    return 'Please enter a valid email';
+                  }
+                  return null;
+                },
+              ),
+              const HeightSpacer(size: 50),
+              CustomTextField(
+                controller: password,
+                keyboardType: TextInputType.visiblePassword,
+                hintText: 'Password',
+                obscureText: loginNotifier.obsecureText,
+                validator: (password) {
+                  if (password!.isEmpty || password.length < 6) {
+                    return 'Please enter a valid Password';
+                  } else {
                     return null;
+                  }
+                },
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    loginNotifier.obsecureText = !loginNotifier.obsecureText;
                   },
-                ),
-                const HeightSpacer(size: 50),
-                CustomTextField(
-                  controller: password,
-                  keyboardType: TextInputType.visiblePassword,
-                  hintText: 'Password',
-                  validator: (password) {
-                    if (password!.isEmpty || password.length < 6) {
-                      return 'Please enter a valid Password';
-                    } else {
-                      return null;
-                    }
-                  },
-                  suffixIcon: GestureDetector(
-                    onTap: () {},
-                    child: Icon(
-                      Icons.visibility,
-                      color: Color(kDark.value),
-                    ),
+                  child: Icon(
+                    loginNotifier.obsecureText
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Color(kDark.value),
                   ),
                 ),
-                const HeightSpacer(size: 10),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: null,
-                    child: ReusableText(
-                      text: 'Register',
-                      style: appstyle(14, Color(kDark.value), FontWeight.w500),
-                    ),
+              ),
+              const HeightSpacer(size: 10),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: null,
+                  child: ReusableText(
+                    text: 'Register',
+                    style: appstyle(14, Color(kDark.value), FontWeight.w500),
                   ),
                 ),
-                const HeightSpacer(size: 50),
-                CustomButton(
-                  onTap: () {},
-                  text: "Login",
-                ),
-              ],
-            ),
+              ),
+              const HeightSpacer(size: 50),
+              CustomButton(
+                onTap: () {},
+                text: "Login",
+              ),
+            ],
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }
